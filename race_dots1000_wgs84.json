@@ -1,9 +1,0 @@
-{"type":"FeatureCollection","crs":{"type":"name","properties":{"name": "EPSG:4326"}},"features": [
-{"type":"Feature","geometry":{"type":"Point","coordinates":[-112.72640096610309,33.729114997965745]},"properties":{"lon":-1531100.92599,"lat":-286988.476122,"race":"hispanic"}},
-{"type":"Feature","geometry":{"type":"Point","coordinates":[-87.6793326739942,41.740357621743186]},"properties":{"lon":686176.488703,"lat":505135.145896,"race":"black_aa"}},
-{"type":"Feature","geometry":{"type":"Point","coordinates":[-82.88712048299287,39.844242944654184]},"properties":{"lon":1108529.60384,"lat":339337.974801,"race":"white"}},
-{"type":"Feature","geometry":{"type":"Point","coordinates":[-121.74252737676674,39.91945669190702]},"properties":{"lon":-2154271.62639,"lat":564736.878466,"race":"asian"}},
-{"type":"Feature","geometry":{"type":"Point","coordinates":[-93.86028250233758,43.87684763115825]},"properties":{"lon":171291.828004,"lat":715725.784233,"race":"white"}},
-{"type":"Feature","geometry":{"type":"Point","coordinates":[-82.67372740193962,34.69255293620707]},"properties":{"lon":1207114.64893,"lat":-229605.281453,"race":"white"}},
-{"type":"Feature","geometry":{"type":"Point","coordinates":[-81.30134755410702,29.673846282744712]},"properties":{"lon":1416629.09005,"lat":-763819.583247,"race":"white"}},
-{"type":"Feature","geometry":{"type":"Point","coordinates":[-84.84373688021014,42.134136655552446]},"properties":{"lon":913920.53376,"lat":572834.685123,"race":"white"}}]}
