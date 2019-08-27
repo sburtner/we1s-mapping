@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Interest Colleges & Universities</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+    integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+    crossorigin=""></script>
+    <script src="src/plugins/leaflet-ajax-gh-pages/dist/leaflet.ajax.min.js"></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet'/>
+    <style>
+      html, body, #map {
+        height: 100%;
+      }
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      .leaflet-control-layers {
+        padding: 6px 8px;
+        font: 14px/16px Arial, Helvetica, sans-serif;
+        background: white;
+        background: rgba(255,255,255);
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        border-radius: 5px;
+      }
+      .info {
+        padding: 6px 8px;
+        font: 14px/16px Arial, Helvetica, sans-serif;
+        background: white;
+        background: rgba(255,255,255);
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        border-radius: 5px;
+      }
+      .legend {
+        line-height: 18px;
+        color: "#FFFFFF";
+      }
+      .legend i {
+        width: 18px;
+        height: 18px;
+        float: left;
+        margin-right: 8px;
+      }
+      .legend .circle {
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"</div>
+    <script>
+      var HBCUicon = L.icon({iconUrl: 'img/icons/hbcu_book.png',
+        iconSize: [15, 15]});
+      var HSIicon = L.icon({iconUrl: 'img/icons/hsi_book.png',
+        iconSize: [15, 15]});
+      var WCicon = L.icon({iconUrl: 'img/icons/wc_book.png',
+        iconSize: [15, 15]});
+      var TCicon = L.icon({iconUrl: 'img/icons/tc_book.png',
+        iconSize: [15, 15]});
+
+      var dark = L.tileLayer('https://api.mapbox.com/styles/v1/sburtner/{id}/tiles/256/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Basemap by © <a href="https://www.mapbox.com/">Mapbox</a>',
+        id: 'cjynuhtax42fh1cq14prabicc',
+        accessToken: 'pk.eyJ1Ijoic2J1cnRuZXIiLCJhIjoiY2o4b3JlbXEyMDZiczMzbWt0cGMxdGMzcSJ9.4cfUZCPSQvyz7FFabHrflA',
+        opacity: 0.8
+      }),
+        streets = L.tileLayer('https://api.mapbox.com/styles/v1/sburtner/{id}/tiles/256/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Basemap by © <a href="https://www.mapbox.com/">Mapbox</a>',
+        id: 'cjykd7z7a0ti01dqv6ot88ysz',
+        accessToken: 'pk.eyJ1Ijoic2J1cnRuZXIiLCJhIjoiY2o4b3JlbXEyMDZiczMzbWt0cGMxdGMzcSJ9.4cfUZCPSQvyz7FFabHrflA',
+        opacity: 0.8
+      });
+        // blue = L.tileLayer('https://api.mapbox.com/styles/v1/sburtner/{id}/tiles/256/{z}/{x}/{y}?access_token={accessToken}', {
+        // attribution: 'Basemap by © <a href="https://www.mapbox.com/">Mapbox</a>',
+        // id: 'cjxxkp06oaoyv1cqpt8ifdyjm',
+        // accessToken: 'pk.eyJ1Ijoic2J1cnRuZXIiLCJhIjoiY2o4b3JlbXEyMDZiczMzbWt0cGMxdGMzcSJ9.4cfUZCPSQvyz7FFabHrflA',
+        // opacity: 0.8
+      // });
+
+      var map = L.map('map', {
+        preferCanvas: true,
+        center: [39.8, -98.6],
+        zoom: 4,
+        layers: [dark, streets],//, blue],
+        fullscreenControl: true,
+        fullscreenControl: {
+          pseudoFullscreen: false
+        }
+      });
+
+      var baseMaps = {
+        "Streets": streets,
+        //"Blue": blue,
+        "Dark": dark
+      };
+
+      // var schools = new L.GeoJSON.AJAX("https://raw.githubusercontent.com/sburtner/we1s-mapping/master/SIC.json", {
+      //   pointToLayer: function (feature, latlng) {
+      //     switch(feature.properties.Category) {
+      //       case "HSI": return L.marker(latlng, {icon: HSIicon});
+      //       case "HBCU": return L.marker(latlng, {icon: HBCUicon});
+      //       case "Women's College": return L.marker(latlng, {icon: WCicon});
+      //       case "Tribal College": return L.marker(latlng, {icon: TCicon});
+      //     }
+      //   }
+      // }).addTo(map);
+
+      var HBCUs = new L.GeoJSON.AJAX("https://raw.githubusercontent.com/sburtner/we1s-mapping/master/SIC.json", {
+        pointToLayer: function (feature, latlng) {
+          if (feature.properties.Category == "HBCU")
+            return L.marker(latlng, {icon: HBCUicon});
+        }
+      }).addTo(map);
+
+      var HSIs = new L.GeoJSON.AJAX("https://raw.githubusercontent.com/sburtner/we1s-mapping/master/SIC.json", {
+        pointToLayer: function (feature, latlng) {
+          if (feature.properties.Category == "HSI")
+            return L.marker(latlng, {icon: HSIicon});
+        }
+      }).addTo(map);
+
+      var WCs = new L.GeoJSON.AJAX("https://raw.githubusercontent.com/sburtner/we1s-mapping/master/SIC.json", {
+        pointToLayer: function (feature, latlng) {
+          if (feature.properties.Category == "Women's College")
+            return L.marker(latlng, {icon: WCicon});
+        }
+      }).addTo(map);
+
+      var TCs = new L.GeoJSON.AJAX("https://raw.githubusercontent.com/sburtner/we1s-mapping/master/SIC.json", {
+        pointToLayer: function (feature, latlng) {
+          if (feature.properties.Category == "Tribal College")
+            return L.marker(latlng, {icon: TCicon});
+        }
+      }).addTo(map);
+
+
+      var race1 = new L.GeoJSON.AJAX("https://raw.githubusercontent.com/sburtner/we1s-mapping/master/racedots1.json", {
+        pointToLayer: function (feature, latlng) {
+           switch (feature.properties.race) {
+             case "white": return L.circleMarker(latlng, {radius: 1, fillColor: "#FF40FF", weight: 0, fillOpacity: 0.8}); // magenta
+             case "black_aa": return L.circleMarker(latlng, {radius: 1, fillColor: "#FFC000", weight: 0, fillOpacity: 0.8}); // yellow/orange
+             case "hispanic": return L.circleMarker(latlng, {radius: 1, fillColor: "#0070C0", weight: 0, fillOpacity: 0.8}); // blue
+             case "asian": return L.circleMarker(latlng, {radius: 1, fillColor: "#00B0F0", weight: 0, fillOpacity: 0.8}); //aqua
+             case "aa_an": return L.circleMarker(latlng, {radius: 1, fillColor: "#00B050", weight: 0, fillOpacity: 0.8}); // green
+           }
+        }
+      });
+
+      var race2 = new L.GeoJSON.AJAX("https://raw.githubusercontent.com/sburtner/we1s-mapping/master/racedots2.json", {
+        pointToLayer: function (feature, latlng) {
+           switch (feature.properties.race) {
+             case "white": return L.circleMarker(latlng, {radius: 1, fillColor: "#FF40FF", weight: 0, fillOpacity: 0.8}); // magenta
+             case "black_aa": return L.circleMarker(latlng, {radius: 1, fillColor: "#FFC000", weight: 0, fillOpacity: 0.8}); // yellow/orange
+             case "hispanic": return L.circleMarker(latlng, {radius: 1, fillColor: "#0070C0", weight: 0, fillOpacity: 0.8}); // blue
+             case "asian": return L.circleMarker(latlng, {radius: 1, fillColor: "#00B0F0", weight: 0, fillOpacity: 0.8}); //aqua
+             case "aa_an": return L.circleMarker(latlng, {radius: 1, fillColor: "#00B050", weight: 0, fillOpacity: 0.8}); // green
+           }
+        }
+      });
+
+      var race3 = new L.GeoJSON.AJAX("https://raw.githubusercontent.com/sburtner/we1s-mapping/master/racedots3.json", {
+        pointToLayer: function (feature, latlng) {
+           switch (feature.properties.race) {
+             case "white": return L.circleMarker(latlng, {radius: 1, fillColor: "#FF40FF", weight: 0, fillOpacity: 0.8}); // magenta
+             case "black_aa": return L.circleMarker(latlng, {radius: 1, fillColor: "#FFC000", weight: 0, fillOpacity: 0.8}); // yellow/orange
+             case "hispanic": return L.circleMarker(latlng, {radius: 1, fillColor: "#0070C0", weight: 0, fillOpacity: 0.8}); // blue
+             case "asian": return L.circleMarker(latlng, {radius: 1, fillColor: "#00B0F0", weight: 0, fillOpacity: 0.8}); //aqua
+             case "aa_an": return L.circleMarker(latlng, {radius: 1, fillColor: "#00B050", weight: 0, fillOpacity: 0.8}); // green
+           }
+        }
+      });
+
+      var races = L.layerGroup([race1, race2, race3]);
+      races.addTo(map);
+
+      // Create legend
+      function getColor(d) {
+        return d === "white" ? "#FF40FF" :
+          d === "black_aa" ? "#FFC000" :
+          d === "hispanic" ? "#0070C0": // blue
+          d === "asian" ? "#00B0F0": // aqua
+          d === "aa_an" ? "#00B050": // green}
+          "#00B050";
+      }
+
+      var legend = L.control({position: 'topleft'});
+
+      legend.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info legend');
+        categories = ["white", "black_aa", "hispanic", "asian", "aa_an"];
+        labels = ["White", "Black or African American", "Hispanic", "Asian", "American Indian or Alaska Native"];
+
+        for (var i = 0; i < categories.length; i++) {  
+          div.innerHTML +=
+            '<i class="circle" style="background:' + getColor(categories[i]) + '"></i> ' + (categories[i] ? labels[i] + '<br>' : '+');
+          }
+        return div;
+      };
+
+      var overLays = {
+        "<img src = 'img/icons/hbcu_book.png' height=20>HBCU": HBCUs,
+        "<img src = 'img/icons/hsi_book.png' height=20>HSI": HSIs,
+        "<img src = 'img/icons/wc_book.png' height=20>Women's College": WCs,
+        "<img src = 'img/icons/tc_book.png' height=20>Tribal College": TCs,
+         "Population by Race (1 per 1,000 people)" : races};
+
+      L.control.layers(baseMaps, overLays, {position: 'topleft'}).addTo(map);
+
+      // To fix: Add legend to control?
+      legend.addTo(map);
+      
+      L.control.scale({position: 'bottomleft'}).addTo(map);
+
+    </script>
+  </body>
+</html>
