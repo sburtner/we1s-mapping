@@ -57,13 +57,13 @@
   <body>
     <div id="map"</div>
     <script>
-      var HBCUicon = L.icon({iconUrl: 'img/icons/hbcu_book.png',
+      var HBCUicon = L.icon({iconUrl: 'https://raw.githubusercontent.com/sburtner/we1s-mapping/master/webmap/hbcu_book.png',
         iconSize: [15, 15]});
-      var HSIicon = L.icon({iconUrl: 'img/icons/hsi_book.png',
+      var HSIicon = L.icon({iconUrl: 'https://raw.githubusercontent.com/sburtner/we1s-mapping/master/webmap/hsi_book.png',
         iconSize: [15, 15]});
-      var WCicon = L.icon({iconUrl: 'img/icons/wc_book.png',
+      var WCicon = L.icon({iconUrl: 'https://raw.githubusercontent.com/sburtner/we1s-mapping/master/webmap/wc_book.png',
         iconSize: [15, 15]});
-      var TCicon = L.icon({iconUrl: 'img/icons/tc_book.png',
+      var TCicon = L.icon({iconUrl: 'https://raw.githubusercontent.com/sburtner/we1s-mapping/master/webmap/tc_book.png',
         iconSize: [15, 15]});
 
       var dark = L.tileLayer('https://api.mapbox.com/styles/v1/sburtner/{id}/tiles/256/{z}/{x}/{y}?access_token={accessToken}', {
@@ -206,10 +206,10 @@
       };
 
       var overLays = {
-        "<img src = 'img/icons/hbcu_book.png' height=20>HBCU": HBCUs,
-        "<img src = 'img/icons/hsi_book.png' height=20>HSI": HSIs,
-        "<img src = 'img/icons/wc_book.png' height=20>Women's College": WCs,
-        "<img src = 'img/icons/tc_book.png' height=20>Tribal College": TCs,
+        "<img src = 'https://raw.githubusercontent.com/sburtner/we1s-mapping/master/webmap/hbcu_book.png' height=20>HBCU": HBCUs,
+        "<img src = 'https://raw.githubusercontent.com/sburtner/we1s-mapping/master/webmap/hsi_book.png' height=20>HSI": HSIs,
+        "<img src = 'https://raw.githubusercontent.com/sburtner/we1s-mapping/master/webmap/wc_book.png' height=20>Women's College": WCs,
+        "<img src = 'https://raw.githubusercontent.com/sburtner/we1s-mapping/master/webmap/tc_book.png' height=20>Tribal College": TCs,
          "Population by Race (1 per 1,000 people)" : races};
 
       L.control.layers(baseMaps, overLays, {position: 'topleft'}).addTo(map);
