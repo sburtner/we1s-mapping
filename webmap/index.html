@@ -10,7 +10,6 @@
     integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
     crossorigin=""></script>
     <script type="text/javascript" src="leaflet.ajax.js"></script>
-    <script type="text/javascript" src="leaflet.ajax.min.js"></script>
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet'/>
     <style>
@@ -58,13 +57,13 @@
   <body>
     <div id="map"</div>
     <script>
-      var HBCUicon = L.icon({iconUrl: 'https://raw.githubusercontent.com/sburtner/we1s-mapping/master/webmap/hbcu_book.png',
+      var HBCUicon = L.icon({iconUrl: 'hbcu_book.png',
         iconSize: [15, 15]});
-      var HSIicon = L.icon({iconUrl: 'https://raw.githubusercontent.com/sburtner/we1s-mapping/master/webmap/hsi_book.png',
+      var HSIicon = L.icon({iconUrl: 'hsi_book.png',
         iconSize: [15, 15]});
-      var WCicon = L.icon({iconUrl: 'https://raw.githubusercontent.com/sburtner/we1s-mapping/master/webmap/wc_book.png',
+      var WCicon = L.icon({iconUrl: 'wc_book.png',
         iconSize: [15, 15]});
-      var TCicon = L.icon({iconUrl: 'https://raw.githubusercontent.com/sburtner/we1s-mapping/master/webmap/tc_book.png',
+      var TCicon = L.icon({iconUrl: 'tc_book.png',
         iconSize: [15, 15]});
 
       var dark = L.tileLayer('https://api.mapbox.com/styles/v1/sburtner/{id}/tiles/256/{z}/{x}/{y}?access_token={accessToken}', {
@@ -207,10 +206,10 @@
       };
 
       var overLays = {
-        "<img src = 'https://raw.githubusercontent.com/sburtner/we1s-mapping/master/webmap/hbcu_book.png' height=20>HBCU": HBCUs,
-        "<img src = 'https://raw.githubusercontent.com/sburtner/we1s-mapping/master/webmap/hsi_book.png' height=20>HSI": HSIs,
-        "<img src = 'https://raw.githubusercontent.com/sburtner/we1s-mapping/master/webmap/wc_book.png' height=20>Women's College": WCs,
-        "<img src = 'https://raw.githubusercontent.com/sburtner/we1s-mapping/master/webmap/tc_book.png' height=20>Tribal College": TCs,
+        "<img src = 'hbcu_book.png' height=20>HBCU": HBCUs,
+        "<img src = 'hsi_book.png' height=20>HSI": HSIs,
+        "<img src = 'wc_book.png' height=20>Women's College": WCs,
+        "<img src = 'tc_book.png' height=20>Tribal College": TCs,
          "Population by Race (1 per 1,000 people)" : races};
 
       L.control.layers(baseMaps, overLays, {position: 'topleft'}).addTo(map);
